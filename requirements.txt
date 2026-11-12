@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pytest
+httpx
+scikit-learn
+joblib
+prometheus-fastapi-instrumentator

@@ -1,0 +1,35 @@
+name: Tests Automatiques MLOps
+
+# Déclenche le robot à chaque envoi (push) sur la branche main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  verifier-le-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupérer le code du dépôt GitHub
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      # 2. Installer Python
+      - name: Configuration de Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Installer les dépendances
+      - name: Installation des bibliothèques
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Entraîner le modèle IA pour le test
+      - name: Entraînement du modèle
+        run: python train.py
+
+      # 5. Lancer pytest
+      - name: Exécution des tests pytest
+        run: pytest
